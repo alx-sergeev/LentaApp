@@ -31,6 +31,7 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension ViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
