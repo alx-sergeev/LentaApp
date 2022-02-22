@@ -16,11 +16,13 @@ class ViewController: UIViewController {
     private let networkManager: NetworkManagerProtocol = NetworkManager.shared
     private var photos: [Photo]! = []
     private var numPage = 1
+    private let segueToDetail = "toDetail"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         myTableView.dataSource = self
+        myTableView.delegate = self
         
         let _ = networkManager.fetchData(page: numPage, perPage: 10) { [weak self] decodeData in
             self?.photos = decodeData
@@ -29,6 +31,15 @@ class ViewController: UIViewController {
                 self?.myTableView.reloadData()
             }
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == segueToDetail else { return }
+        guard let detailVC = segue.destination as? DetailViewController else { return }
+        guard let selectIndexPath = myTableView.indexPathForSelectedRow else { return }
+        
+        let imageData = photos[selectIndexPath.row]
+        detailVC.imageData = imageData
     }
 }
 
@@ -70,6 +81,14 @@ extension ViewController: UITableViewDataSource {
         
         cell.titlePhoto.text = photos[row].description ?? ""
         
+        cell.selectionStyle = .none
+        
         return cell
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: segueToDetail, sender: nil)
     }
 }

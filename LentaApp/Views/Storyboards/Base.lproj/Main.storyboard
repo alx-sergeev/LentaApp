@@ -70,7 +70,7 @@
                     <navigationItem key="navigationItem" title="Gallery" id="AmN-Zo-qeD"/>
                     <connections>
                         <outlet property="myTableView" destination="tGQ-qr-2M3" id="znM-Cl-MUp"/>
-                        <segue destination="KcS-bb-gwf" kind="show" id="P9s-Lu-FQA"/>
+                        <segue destination="KcS-bb-gwf" kind="show" identifier="toDetail" id="P9s-Lu-FQA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
