@@ -7,30 +7,36 @@
 
 import UIKit
 
+// MARK: - Protocol DetailViewControllerProtocol
+protocol DetailViewControllerProtocol {
+    func showDetailPhoto(imageData: Data)
+    func showInfoDownloadPhoto(date: String)
+}
+
 class DetailViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var detailPhoto: UIImageView!
     @IBOutlet weak var downloadLabel: UILabel!
     
     // MARK: - Properties
+    private var presenter: DetailViewControllerPresenterProtocol!
+    
     var imageData: Photo!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if imageData != nil {
-            DispatchQueue.global().async {
-                guard let smallImagePath = self.imageData.urls?["small"] else { return }
-                guard let URL = URL(string: smallImagePath) else { return }
-                guard let imageData = try? Data(contentsOf: URL) else { return }
-            
-                DispatchQueue.main.async {
-                    self.detailPhoto.image = UIImage(data: imageData)
-                }
-            }
-        }
+        presenter = DetailViewControllerPresenter(view: self)
         
         downloadLabel.isHidden = true
+        
+        if imageData != nil {
+            guard let smallImagePath = imageData.urls?["small"] else { return }
+            
+            DispatchQueue.global().async {
+                self.presenter?.fetchDetailPhoto(path: smallImagePath)
+            }
+        }
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
@@ -50,11 +56,20 @@ class DetailViewController: UIViewController {
             return
         }
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.YYYY hh:mm:ss"
-        let dateString = dateFormatter.string(from: Date.init())
-        
-        downloadLabel.text = "Дата скачивания: \(dateString)"
+        presenter?.didSavePhoto()
+    }
+}
+
+// MARK: - DetailViewControllerProtocol
+extension DetailViewController: DetailViewControllerProtocol {
+    func showDetailPhoto(imageData: Data) {
+        DispatchQueue.main.async {
+            self.detailPhoto.image = UIImage(data: imageData)
+        }
+    }
+    
+    func showInfoDownloadPhoto(date: String) {
+        downloadLabel.text = "Дата скачивания: \(date)"
         downloadLabel.isHidden = false
         
         let ac = UIAlertController(title: "Сохранено", message: "Изображение сохранено в ваши фотографии", preferredStyle: .alert)
