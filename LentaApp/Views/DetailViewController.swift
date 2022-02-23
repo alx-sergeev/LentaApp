@@ -6,10 +6,10 @@
 //
 
 import UIKit
+import Nuke
 
 // MARK: - Protocol DetailViewControllerProtocol
 protocol DetailViewControllerProtocol: AnyObject {
-    func showDetailPhoto(image: UIImage)
     func showInfoDownloadPhoto(date: String)
 }
 
@@ -31,11 +31,11 @@ class DetailViewController: UIViewController {
         downloadLabel.isHidden = true
         
         if imageData != nil {
-            guard let smallImagePath = imageData.urls?["small"] else { return }
+            guard
+                let smallImagePath = imageData.urls?["small"],
+                let URL = URL(string: smallImagePath) else { return }
             
-            DispatchQueue.global().async {
-                self.presenter?.fetchDetailPhoto(path: smallImagePath)
-            }
+            Nuke.loadImage(with: URL, into: detailPhoto)
         }
     }
     
@@ -62,12 +62,6 @@ class DetailViewController: UIViewController {
 
 // MARK: - DetailViewControllerProtocol
 extension DetailViewController: DetailViewControllerProtocol {
-    func showDetailPhoto(image: UIImage) {
-        DispatchQueue.main.async {
-            self.detailPhoto.image = image
-        }
-    }
-    
     func showInfoDownloadPhoto(date: String) {
         downloadLabel.text = "Дата скачивания: \(date)"
         downloadLabel.isHidden = false

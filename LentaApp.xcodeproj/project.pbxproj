@@ -20,6 +20,7 @@
 		3FA7E77427C51F91007A34E8 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7E77327C51F91007A34E8 /* PhotoCell.swift */; };
 		3FA7E77627C5252D007A34E8 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7E77527C5252D007A34E8 /* Photo.swift */; };
 		3FA7E77927C52784007A34E8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7E77827C52784007A34E8 /* NetworkManager.swift */; };
+		3FDD901627C66076009345AF /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 3FDD901527C66076009345AF /* Nuke */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FDD901627C66076009345AF /* Nuke in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +162,9 @@
 			dependencies = (
 			);
 			name = LentaApp;
+			packageProductDependencies = (
+				3FDD901527C66076009345AF /* Nuke */,
+			);
 			productName = LentaApp;
 			productReference = 3FA7E75227C4DD7C007A34E8 /* LentaApp.app */;
 			productType = "com.apple.product-type.application";
@@ -188,6 +193,9 @@
 				Base,
 			);
 			mainGroup = 3FA7E74927C4DD7C007A34E8;
+			packageReferences = (
+				3FDD901427C66076009345AF /* XCRemoteSwiftPackageReference "Nuke" */,
+			);
 			productRefGroup = 3FA7E75327C4DD7C007A34E8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -446,6 +454,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3FDD901427C66076009345AF /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3FDD901527C66076009345AF /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3FDD901427C66076009345AF /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3FA7E74A27C4DD7C007A34E8 /* Project object */;
 }
