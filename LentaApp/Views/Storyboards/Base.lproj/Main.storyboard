@@ -109,7 +109,13 @@
                             <constraint firstItem="J8g-bz-wFS" firstAttribute="leading" secondItem="hdd-bm-bvb" secondAttribute="leading" constant="20" id="lpd-8q-9dI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="bDi-ju-psn"/>
+                    <navigationItem key="navigationItem" id="bDi-ju-psn">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="nPJ-1T-6Hf">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="KcS-bb-gwf" id="tby-4u-04E"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="detailPhoto" destination="Iy7-Bi-z1j" id="Uvi-9k-bSN"/>
                         <outlet property="downloadLabel" destination="J8g-bz-wFS" id="ibp-wb-aTq"/>
