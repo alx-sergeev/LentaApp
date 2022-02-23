@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - Protocol ViewControllerProtocol
-protocol ViewControllerProtocol {
+protocol ViewControllerProtocol: AnyObject {
     func addPhotosForPage(photos: [Photo])
 }
 

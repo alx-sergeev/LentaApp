@@ -6,7 +6,7 @@
 //
 
 // MARK: - Protocol ViewControllerPresenterProtocol
-protocol ViewControllerPresenterProtocol {
+protocol ViewControllerPresenterProtocol: AnyObject {
     init(view: ViewControllerProtocol)
     func fetchPhotosForPage(page: Int, perPage: Int)
 }

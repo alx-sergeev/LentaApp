@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - Protocol DetailViewControllerProtocol
-protocol DetailViewControllerProtocol {
+protocol DetailViewControllerProtocol: AnyObject {
     func showDetailPhoto(imageData: Data)
     func showInfoDownloadPhoto(date: String)
 }

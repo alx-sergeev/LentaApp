@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Protocol ViewControllerPresenterProtocol
-protocol DetailViewControllerPresenterProtocol {
+protocol DetailViewControllerPresenterProtocol: AnyObject {
     init(view: DetailViewControllerProtocol)
     func fetchDetailPhoto(path: String)
     func didSavePhoto()
