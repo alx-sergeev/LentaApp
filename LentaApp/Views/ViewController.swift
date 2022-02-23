@@ -7,30 +7,33 @@
 
 import UIKit
 
+// MARK: - Protocol ViewControllerProtocol
+protocol ViewControllerProtocol {
+    func addPhotosForPage(photos: [Photo])
+}
+
 class ViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var myTableView: UITableView!
     
     // MARK: - Properties
+    private var presenter: ViewControllerPresenterProtocol!
+    
     private let cellName = "photoCell"
-    private let networkManager: NetworkManagerProtocol = NetworkManager.shared
-    private var photos: [Photo]! = []
-    private var numPage = 1
     private let segueToDetail = "toDetail"
+    private var photos: [Photo] = []
+    private var numPage = 1
+    private let perPage = 10
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        presenter = ViewControllerPresenter(view: self)
+        
         myTableView.dataSource = self
         myTableView.delegate = self
         
-        let _ = networkManager.fetchData(page: numPage, perPage: 10) { [weak self] decodeData in
-            self?.photos = decodeData
-            
-            DispatchQueue.main.async {
-                self?.myTableView.reloadData()
-            }
-        }
+        presenter?.fetchPhotosForPage(page: numPage, perPage: perPage)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -60,13 +63,7 @@ extension ViewController: UITableViewDataSource {
         if row == photos.count - 1 {
             numPage += 1
             
-            let _ = networkManager.fetchData(page: numPage, perPage: 10) { [weak self] decodeData in
-                let _ = decodeData.map { self?.photos.append($0) }
-                
-                DispatchQueue.main.async {
-                    self?.myTableView.reloadData()
-                }
-            }
+            presenter?.fetchPhotosForPage(page: numPage, perPage: perPage)
         }
         
         DispatchQueue.global().async {
@@ -87,8 +84,20 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: segueToDetail, sender: nil)
+    }
+}
+
+// MARK: - ViewControllerProtocol
+extension ViewController: ViewControllerProtocol {
+    func addPhotosForPage(photos: [Photo]) {
+        self.photos += photos
+        
+        DispatchQueue.main.async {
+            self.myTableView.reloadData()
+        }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F02CDDC27C60BA600E8F55C /* ViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F02CDDB27C60BA600E8F55C /* ViewControllerPresenter.swift */; };
 		3F6FC36127C5876D0010F979 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6FC36027C5876D0010F979 /* DetailViewController.swift */; };
 		3FA7E75627C4DD7C007A34E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7E75527C4DD7C007A34E8 /* AppDelegate.swift */; };
 		3FA7E75827C4DD7C007A34E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7E75727C4DD7C007A34E8 /* SceneDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F02CDDB27C60BA600E8F55C /* ViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenter.swift; sourceTree = "<group>"; };
 		3F6FC36027C5876D0010F979 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		3FA7E75227C4DD7C007A34E8 /* LentaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LentaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FA7E75527C4DD7C007A34E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		3FA7E76D27C4DE44007A34E8 /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				3F02CDDB27C60BA600E8F55C /* ViewControllerPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				3FA7E75827C4DD7C007A34E8 /* SceneDelegate.swift in Sources */,
 				3FA7E77627C5252D007A34E8 /* Photo.swift in Sources */,
 				3F6FC36127C5876D0010F979 /* DetailViewController.swift in Sources */,
+				3F02CDDC27C60BA600E8F55C /* ViewControllerPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
