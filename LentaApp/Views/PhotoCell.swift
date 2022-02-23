@@ -11,14 +11,29 @@ class PhotoCell: UITableViewCell {
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var titlePhoto: UILabel!
     
+    private var imageCache = NSCache<NSString, UIImage>()
+    
     func configureCell(photo: Photo) {
-        DispatchQueue.global().async {
-            guard let smallImagePath = photo.urls?["small"] else { return }
-            guard let URL = URL(string: smallImagePath) else { return }
-            guard let imageData = try? Data(contentsOf: URL) else { return }
+        guard let smallImagePath = photo.urls?["small"] else { return }
+        guard let URL = URL(string: smallImagePath) else { return }
         
+        let urlAbsolutely = URL.absoluteString
+        
+        if let cachedImage = self.imageCache.object(forKey: urlAbsolutely as NSString) {
             DispatchQueue.main.async {
-                self.photo.image = UIImage(data: imageData)
+                self.photo.image = cachedImage
+            }
+        } else {
+            DispatchQueue.global().async {
+                if let imageData = try? Data(contentsOf: URL) {
+                    guard let image = UIImage(data: imageData) else { return }
+                    
+                    self.imageCache.setObject(image, forKey: urlAbsolutely as NSString)
+                    
+                    DispatchQueue.main.async {
+                        self.photo.image = image
+                    }
+                }
             }
         }
         
