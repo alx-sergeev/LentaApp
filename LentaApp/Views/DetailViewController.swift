@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Protocol DetailViewControllerProtocol
 protocol DetailViewControllerProtocol: AnyObject {
-    func showDetailPhoto(imageData: Data)
+    func showDetailPhoto(image: UIImage)
     func showInfoDownloadPhoto(date: String)
 }
 
@@ -62,9 +62,9 @@ class DetailViewController: UIViewController {
 
 // MARK: - DetailViewControllerProtocol
 extension DetailViewController: DetailViewControllerProtocol {
-    func showDetailPhoto(imageData: Data) {
+    func showDetailPhoto(image: UIImage) {
         DispatchQueue.main.async {
-            self.detailPhoto.image = UIImage(data: imageData)
+            self.detailPhoto.image = image
         }
     }
     

@@ -17,6 +17,7 @@ protocol DetailViewControllerPresenterProtocol: AnyObject {
 class DetailViewControllerPresenter: DetailViewControllerPresenterProtocol {
     // MARK: - Properties
     private var view: DetailViewControllerProtocol?
+    private let networkManager: NetworkManagerProtocol = NetworkManager.shared
 
     required init(view: DetailViewControllerProtocol) {
         self.view = view
@@ -24,10 +25,11 @@ class DetailViewControllerPresenter: DetailViewControllerPresenterProtocol {
     
     // MARK: - Methods
     func fetchDetailPhoto(path: String) {
-        guard let URL = URL(string: path) else { return }
-        guard let imageData = try? Data(contentsOf: URL) else { return }
-        
-        view?.showDetailPhoto(imageData: imageData)
+        networkManager.fetchItem(path: path) { [weak self] (image) in
+            guard let self = self else { return }
+            
+            self.view?.showDetailPhoto(image: image)
+        }
     }
     
     func didSavePhoto() {
