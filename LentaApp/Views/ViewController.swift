@@ -66,19 +66,8 @@ extension ViewController: UITableViewDataSource {
             presenter?.fetchPhotosForPage(page: numPage, perPage: perPage)
         }
         
-        DispatchQueue.global().async {
-            guard let smallImagePath = self.photos[row].urls?["small"] else { return }
-            guard let URL = URL(string: smallImagePath) else { return }
-            guard let imageData = try? Data(contentsOf: URL) else { return }
-        
-            DispatchQueue.main.async {
-                cell.photo.image = UIImage(data: imageData)
-            }
-        }
-        
-        cell.titlePhoto.text = photos[row].description ?? ""
-        
-        cell.selectionStyle = .none
+        let photo = photos[row]
+        cell.configureCell(photo: photo)
         
         return cell
     }
