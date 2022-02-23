@@ -56,6 +56,7 @@
 		3FA7E74927C4DD7C007A34E8 = {
 			isa = PBXGroup;
 			children = (
+				3FA7E76927C4DDA4007A34E8 /* .gitignore */,
 				3FA7E75427C4DD7C007A34E8 /* LentaApp */,
 				3FA7E75327C4DD7C007A34E8 /* Products */,
 			);
@@ -79,7 +80,6 @@
 				3FA7E75527C4DD7C007A34E8 /* AppDelegate.swift */,
 				3FA7E75727C4DD7C007A34E8 /* SceneDelegate.swift */,
 				3FA7E76327C4DD7F007A34E8 /* Info.plist */,
-				3FA7E76927C4DDA4007A34E8 /* .gitignore */,
 			);
 			path = LentaApp;
 			sourceTree = "<group>";
